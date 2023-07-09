@@ -27,15 +27,14 @@ export class PageListComponent {
   fila!: any;
 
   metaDataColumns: MetaDataColumn[] = [
-    { field: '_id', title: 'ID' },
+    { field: 'id_prestamo', title: 'ID' },
     { field: 'id_equipo_per', title: 'ID EQUIPO' },
     { field: 'fecha_prestamo', title: 'FECHA DEL PRESTAMO' },
     { field: 'fecha_devolucion', title: 'FECHA DE DEVOLUCION' },
     { field: 'id_usuario_presta_per', title: 'TECNICO' },
     { field: 'id_usuario_solicita_per', title: 'USUARIO' },
-    { field: 'observariones', title: 'OBSERVACION' },
-    { field: 'estado_equipo', title: 'ESTADO EQUIPO' },
-    { field: 'aprobado', title: 'ESTADO PRESTAMO' },
+    { field: 'observaciones', title: 'OBSERVACION' },
+    { field: 'estado', title: 'ESTADO' },
   ];
 
   keypadButtons: KeypadButton[] = [
@@ -101,6 +100,21 @@ export class PageListComponent {
       this.cargarClientes('');
     });
   }
+  accionAprobar(row: any) {
+    console.log(row);
+    this.prestamoService
+      .aprobarPrestamo(row.id_prestamo, row.id_usuario_presta_per)
+      .subscribe((resp) => {
+        this.mostrarMensaje('Prestamo aprobado');
+        this.cargarClientes('');
+      });
+  }
+  accionRechazar(row: any) {
+    this.prestamoService.rechazarPrestamo(row.id_prestamo).subscribe((resp) => {
+      this.mostrarMensaje('Prestamo rechazado');
+      this.cargarClientes('');
+    });
+  }
 
   buscarData(searchData: any) {
     console.log(searchData);
@@ -155,6 +169,15 @@ export class PageListComponent {
   mostrarMensajeAñadir(): void {
     Swal.fire({
       title: 'Registro añadido',
+      icon: 'info',
+      timer: 3000,
+      showConfirmButton: false,
+    });
+  }
+
+  mostrarMensaje(mensaje: String) {
+    Swal.fire({
+      title: mensaje,
       icon: 'info',
       timer: 3000,
       showConfirmButton: false,

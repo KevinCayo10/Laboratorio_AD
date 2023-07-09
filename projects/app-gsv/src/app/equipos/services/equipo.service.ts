@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cliente } from '../../clientes/models/clientes.model';
+import { Equipo } from '../models/equipo.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EquipoService {
-  url = '';
+  url = '/equipments';
   constructor(private http: HttpClient) {}
 
   cargarEquipos(): Observable<any> {
@@ -18,15 +18,15 @@ export class EquipoService {
     return this.http.get(this.url + id);
   }
 
-  registrarEquipo(cliente: Cliente): Observable<any> {
-    return this.http.post(this.url, cliente);
+  registrarEquipo(equipo: Equipo): Observable<any> {
+    return this.http.post(this.url, equipo);
   }
 
-  actualizarEquipo(id: string, cliente: Cliente): Observable<any> {
-    return this.http.put(this.url + id, cliente);
+  actualizarEquipo(id: string, equipo: Equipo): Observable<any> {
+    return this.http.put(`${this.url}/${id}`, equipo);
   }
 
   eliminarEquipo(id: string): Observable<any> {
-    return this.http.delete(this.url + id);
+    return this.http.delete(`${this.url}/${id}`);
   }
 }

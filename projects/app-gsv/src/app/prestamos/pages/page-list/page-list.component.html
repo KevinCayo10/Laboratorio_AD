@@ -8,12 +8,12 @@
   [data]="fila"></gsv-form>
 <gsv-container>
   <perfect-scrollbar>
-    <gsv-table [data]=" data" [metaDataColumns]="metaDataColumns" [title]="title" (onClick)="accionEditar($event)"
-      (onClickEliminar)="accionEliminar($event)"></gsv-table>
+    <gsv-table-prestamos [data]=" data" [metaDataColumns]="metaDataColumns" [title]="title"
+      (onClick)="accionEditar($event)" (onClickEliminar)="accionEliminar($event)"
+      (onClickAprobar)="accionAprobar($event)" (onClickRechazar)="accionRechazar($event)"></gsv-table-prestamos>
   </perfect-scrollbar>
 
   <gsv-paginator [length]="totalRegistros" (onChangePage)="changePage($event)">
   </gsv-paginator>
 
 </gsv-container>
-<gsv-keypad-button [keypadButtons]="keypadButtons" (onClick)="enviarAccion($event)">

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
-import { ClienteService } from '../../../clientes/services/cliente.service';
 import { environment } from '../../../environments/environment';
 import { KeypadButton } from '../../../shared/interfaces/keypadButton.interface';
 import { MetaDataColumn } from '../../../shared/interfaces/metadatacolumn.interface';
@@ -42,12 +41,10 @@ export class PageListComponent {
   fila!: any;
 
   metaDataColumns: MetaDataColumn[] = [
-    { field: '_id', title: 'ID' },
-    { field: 'nombre_equipo', title: 'NOMBRES' },
-    { field: 'descripcion_equipo', title: 'DESCRIPCION' },
+    { field: 'id_equipo', title: 'ID' },
+    { field: 'nombre', title: 'NOMBRES' },
     { field: 'marca', title: 'MARCA' },
-    { field: 'modelo', title: 'MODELO' },
-    { field: 'caracteristica', title: 'CARACTERISTICA' },
+    { field: 'caracteristicas', title: 'CARACTERISTICA' },
     { field: 'estado', title: 'ESTADO' },
   ];
 
@@ -77,7 +74,7 @@ export class PageListComponent {
       if (buscar) {
         console.log(buscar);
         this.registros = this.registros.filter((registro) =>
-          registro.nombresCompletos.toLowerCase().includes(buscar.toLowerCase())
+          registro.nombre.toLowerCase().includes(buscar.toLowerCase())
         );
         console.log(this.registros);
       }
@@ -125,22 +122,22 @@ export class PageListComponent {
       this.formulario = false;
       return;
     }
-    if (formData.id) {
-      const cliente = { ...formData };
+    if (formData.id_equipo) {
+      const equipo = { ...formData };
       console.log('Entro al ID');
-      console.log(cliente);
+      console.log(equipo);
       this.equipoService
-        .actualizarEquipo(formData.id, cliente)
+        .actualizarEquipo(formData.id_equipo, equipo)
         .subscribe(() => {
           this.cargarClientes('');
           this.formulario = false;
           this.mostrarMensajeActualizacion();
         });
     } else {
-      const cliente = { ...formData };
-      this.equipoService.registrarEquipo(cliente).subscribe(() => {
+      const equipo = { ...formData };
+      this.equipoService.registrarEquipo(equipo).subscribe(() => {
         console.log('Dentro regsitrar');
-        console.log(cliente);
+        console.log(equipo);
         this.cargarClientes('');
         this.formulario = false;
         this.mostrarMensajeAñadir();

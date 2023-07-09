@@ -22,20 +22,15 @@ export class FormComponent {
 
   cargarFormulario() {
     this.formulario = new FormGroup({
-      id: new FormControl(this.data?._id),
-      nombresCompletos: new FormControl(
-        this.data?.nombresCompletos,
-        Validators.required
-      ),
-      direccion: new FormControl(this.data?.direccion, Validators.required),
-      correoElectronico: new FormControl(
-        this.data?.correoElectronico,
-        Validators.required
-      ),
-      celular: new FormControl(this.data?.celular),
+      id_usuario: new FormControl(this.data?.id_usuario),
+      cedula: new FormControl(this.data?.cedula, Validators.required),
+      nombre: new FormControl(this.data?.nombre, Validators.required),
+      apellido: new FormControl(this.data?.apellido, Validators.required),
+      correo: new FormControl(this.data?.correo, Validators.required),
+      contrasena: new FormControl(this.data?.contrasena, Validators.required),
+      rol: new FormControl(this.data?.rol, Validators.required),
     });
   }
-
   grabar() {
     if (this.formulario.valid) {
       const formData = this.formulario.value;

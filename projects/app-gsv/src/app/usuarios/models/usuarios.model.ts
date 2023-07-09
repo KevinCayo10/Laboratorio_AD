@@ -1,27 +1,27 @@
 export class Usuario {
-  _id?: string;
+  id_usuario?: string;
   cedula?: string;
   nombre?: string;
   apellido?: string;
   correo?: string;
-  contraseña?: string;
+  contrasena?: string;
   rol?: string;
 
   constructor(
-    _id?: string,
+    id_usuario?: string,
     cedula?: string,
     nombre?: string,
     apellido?: string,
     correo?: string,
-    contraseña?: string,
+    contrasena?: string,
     rol?: string
   ) {
-    this._id = _id;
+    this.id_usuario = id_usuario;
     this.cedula = cedula;
     this.nombre = nombre;
     this.apellido = apellido;
     this.correo = correo;
-    this.contraseña = contraseña;
+    this.contrasena = contrasena;
     this.rol = rol;
   }
 }

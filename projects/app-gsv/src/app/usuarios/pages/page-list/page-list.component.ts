@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import Swal from 'sweetalert2';
-import { ClienteService } from '../../../clientes/services/cliente.service';
 import { environment } from '../../../environments/environment';
 import { KeypadButton } from '../../../shared/interfaces/keypadButton.interface';
 import { MetaDataColumn } from '../../../shared/interfaces/metadatacolumn.interface';
@@ -32,12 +31,12 @@ export class PageListComponent {
   fila!: any;
 
   metaDataColumns: MetaDataColumn[] = [
-    { field: '_id', title: 'ID' },
+    { field: 'id_usuario', title: 'ID' },
     { field: 'cedula', title: 'CEDULA' },
     { field: 'nombre', title: 'NOMBRE' },
     { field: 'apellido', title: 'APELLIDO' },
     { field: 'correo', title: 'CORREO' },
-    { field: 'contraseña', title: 'CONTRASEÑA' },
+    { field: 'contrasena', title: 'CONTRASEÑA' },
     { field: 'rol', title: 'ROL' },
   ];
 
@@ -67,7 +66,7 @@ export class PageListComponent {
       if (buscar) {
         console.log(buscar);
         this.registros = this.registros.filter((registro) =>
-          registro.nombresCompletos.toLowerCase().includes(buscar.toLowerCase())
+          registro.cedula.toLowerCase().includes(buscar.toLowerCase())
         );
         console.log(this.registros);
       }
@@ -101,6 +100,7 @@ export class PageListComponent {
   accionEliminar(id: any) {
     console.log('Entro a pagelis');
     this.usuarioService.eliminarUsuario(id).subscribe(() => {
+      console.log(id);
       this.cargarClientes('');
     });
   }
@@ -115,22 +115,22 @@ export class PageListComponent {
       this.formulario = false;
       return;
     }
-    if (formData.id) {
-      const cliente = { ...formData };
+    if (formData.cedula) {
+      const usuario = { ...formData };
       console.log('Entro al ID');
-      console.log(cliente);
+      console.log(usuario);
       this.usuarioService
-        .actualizarUsuario(formData.id, cliente)
+        .actualizarUsuario(formData.cedula, usuario)
         .subscribe(() => {
           this.cargarClientes('');
           this.formulario = false;
           this.mostrarMensajeActualizacion();
         });
     } else {
-      const cliente = { ...formData };
-      this.usuarioService.registrarUsuario(cliente).subscribe(() => {
+      const usuario = { ...formData };
+      this.usuarioService.registrarUsuario(usuario).subscribe(() => {
         console.log('Dentro regsitrar');
-        console.log(cliente);
+        console.log(usuario);
         this.cargarClientes('');
         this.formulario = false;
         this.mostrarMensajeAñadir();

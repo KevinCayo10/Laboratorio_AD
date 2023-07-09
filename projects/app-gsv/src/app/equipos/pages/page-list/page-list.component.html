@@ -8,8 +8,8 @@
   [data]="fila"></gsv-form>
 <gsv-container>
   <perfect-scrollbar>
-    <gsv-table [data]=" data" [metaDataColumns]="metaDataColumns" [title]="title" (onClick)="accionEditar($event)"
-      (onClickEliminar)="accionEliminar($event)"></gsv-table>
+    <gsv-table-equipos [data]=" data" [metaDataColumns]="metaDataColumns" [title]="title"
+      (onClick)="accionEditar($event)" (onClickEliminar)="accionEliminar($event)"></gsv-table-equipos>
   </perfect-scrollbar>
 
   <gsv-paginator [length]="totalRegistros" (onChangePage)="changePage($event)">

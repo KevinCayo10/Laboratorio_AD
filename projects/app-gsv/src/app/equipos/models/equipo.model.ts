@@ -1,27 +1,21 @@
 export class Equipo {
-  _id?: string;
-  nombre_equipo?: string;
-  descripcion_equipo?: string;
+  id_equipo?: string;
+  nombre?: string;
   marca?: string;
-  modelo?: string;
-  caracteristica?: string;
+  caracteristicas?: string;
   estado?: string;
 
   constructor(
-    _id?: string,
-    nombre_equipo?: string,
-    descripcion_equipo?: string,
+    id_equipo?: string,
+    nombre?: string,
     marca?: string,
-    modelo?: string,
-    caracteristica?: string,
+    caracteristicas?: string,
     estado?: string
   ) {
-    this._id = _id;
-    this.nombre_equipo = nombre_equipo;
-    this.descripcion_equipo = descripcion_equipo;
+    this.id_equipo = id_equipo;
+    this.nombre = nombre;
     this.marca = marca;
-    this.modelo = modelo;
-    this.caracteristica = caracteristica;
+    this.caracteristicas = caracteristicas;
     this.estado = estado;
   }
 }

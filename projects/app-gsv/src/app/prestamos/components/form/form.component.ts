@@ -22,7 +22,7 @@ export class FormComponent {
 
   cargarFormulario() {
     this.formulario = new FormGroup({
-      id: new FormControl(this.data?._id),
+      id: new FormControl(this.data?.id_prestamo),
       nombresCompletos: new FormControl(
         this.data?.nombresCompletos,
         Validators.required

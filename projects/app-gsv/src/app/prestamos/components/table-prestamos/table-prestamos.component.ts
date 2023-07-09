@@ -8,23 +8,25 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { MetaDataColumn } from '../../interfaces/metadatacolumn.interface';
 import { MatColumnDef, MatTable } from '@angular/material/table';
-
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { MetaDataColumn } from '../../../shared/interfaces/metadatacolumn.interface';
 
 @Component({
-  selector: 'gsv-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  selector: 'gsv-table-prestamos',
+  templateUrl: './table-prestamos.component.html',
+  styleUrls: ['./table-prestamos.component.css'],
 })
-export class TableComponent {
+export class TablePrestamosComponent {
   @Input() data: any;
   @Input() metaDataColumns!: MetaDataColumn[];
   @Input() title: any;
+
+  //OUTPUT
   @Output() onClick: EventEmitter<any> = new EventEmitter<any>();
   @Output() onClickEliminar: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onClickAprobar: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onClickRechazar: EventEmitter<any> = new EventEmitter<any>();
 
   columns: string[] = [];
 
@@ -32,14 +34,34 @@ export class TableComponent {
   columnsDef!: QueryList<MatColumnDef>;
   @ViewChild(MatTable, { static: true }) table!: MatTable<any>;
 
+  pendiente!: boolean;
+  aprobar!: boolean;
+  rechazar!: boolean;
+
+  constructor() {}
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes['metaDataColumns']) {
       this.columns = this.metaDataColumns.map((x) => x.field);
     }
   }
 
+  //Validar si los prestamos estan aprobados o rechazados
+
+  //Si esta aprobado 2da condicion
+
+  //Si esta rechazado 3ra condicion
+
   accionEditar(row: any) {
     this.onClick.emit(row);
+  }
+
+  accionAprobar(row: any) {
+    this.onClickAprobar.emit(row);
+  }
+
+  accionRechazar(row: any) {
+    this.onClickRechazar.emit(row);
   }
 
   accionEliminar(id: any) {
@@ -55,6 +77,15 @@ export class TableComponent {
         this.onClickEliminar.emit(id);
         return;
       }
+    });
+  }
+
+  mensaje(mensaje: string): void {
+    Swal.fire({
+      title: mensaje,
+      icon: 'info',
+      timer: 3000,
+      showConfirmButton: false,
     });
   }
 }

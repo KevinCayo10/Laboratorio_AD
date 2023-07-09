@@ -8,24 +8,21 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
-import { MetaDataColumn } from '../../interfaces/metadatacolumn.interface';
 import { MatColumnDef, MatTable } from '@angular/material/table';
-
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { MetaDataColumn } from '../../../shared/interfaces/metadatacolumn.interface';
 
 @Component({
-  selector: 'gsv-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css'],
+  selector: 'gsv-table-equipos',
+  templateUrl: './table-equipos.component.html',
+  styleUrls: ['./table-equipos.component.css'],
 })
-export class TableComponent {
+export class TableEquiposComponent {
   @Input() data: any;
   @Input() metaDataColumns!: MetaDataColumn[];
   @Input() title: any;
   @Output() onClick: EventEmitter<any> = new EventEmitter<any>();
   @Output() onClickEliminar: EventEmitter<any> = new EventEmitter<any>();
-
   columns: string[] = [];
 
   @ContentChildren(MatColumnDef, { descendants: true })
