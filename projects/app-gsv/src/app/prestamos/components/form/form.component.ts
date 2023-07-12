@@ -22,17 +22,11 @@ export class FormComponent {
 
   cargarFormulario() {
     this.formulario = new FormGroup({
-      id: new FormControl(this.data?.id_prestamo),
-      nombresCompletos: new FormControl(
-        this.data?.nombresCompletos,
+      id_prestamo: new FormControl(this.data?.id_prestamo),
+      observaciones: new FormControl(
+        this.data?.observaciones,
         Validators.required
       ),
-      direccion: new FormControl(this.data?.direccion, Validators.required),
-      correoElectronico: new FormControl(
-        this.data?.correoElectronico,
-        Validators.required
-      ),
-      celular: new FormControl(this.data?.celular),
     });
   }
 

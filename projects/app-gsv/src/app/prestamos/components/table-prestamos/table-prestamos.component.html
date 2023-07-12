@@ -8,23 +8,29 @@
     <tbody>
       <tr *ngFor="let row of data">
         <td *ngFor="let metadata of metaDataColumns">{{ row[metadata.field] }}</td>
+
         <td>
           <div class="btn-group">
             <button class="btn btn-success" [disabled]="!(row.estado === 'PENDIENTE') " (click)="accionAprobar(row)">
               <i class="fa-solid fa-file-circle-check"></i>
+              <span class="btn-tooltip">Aprobar</span>
+
             </button>
             <button class="btn btn-secondary" [disabled]="!(row.estado === 'PENDIENTE')" (click)="accionRechazar(row)">
               <i class="fa-solid fa-file-circle-xmark"></i>
+              <span class="btn-tooltip">Rechazar</span>
+              <span class="btn-tooltip">Devolver</span>
+
             </button>
-          </div>
-          <div class="btn-group">
-            <button class="btn btn-warning" [disabled]="" (click)="accionEditar(row)">
+            <button class="btn btn-warning" [disabled]="(row.estado==='APROBADO')" (click)="accionEditar(row)">
               <i class="fa fa-pencil"></i>
             </button>
             <button class="btn btn-danger" (click)="accionEliminar(row.id_prestamo)">
               <i class="fa fa-trash"></i>
+              <span class="btn-tooltip">Eliminar</span>
             </button>
           </div>
+
         </td>
 
       </tr>

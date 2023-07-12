@@ -11,6 +11,8 @@ import {
 import { MatColumnDef, MatTable } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { MetaDataColumn } from '../../../shared/interfaces/metadatacolumn.interface';
+import { EquipoService } from '../../../equipos/services/equipo.service';
+import { UsuarioService } from '../../../usuarios/services/usuario.service';
 
 @Component({
   selector: 'gsv-table-prestamos',
@@ -29,6 +31,9 @@ export class TablePrestamosComponent {
   @Output() onClickRechazar: EventEmitter<any> = new EventEmitter<any>();
 
   columns: string[] = [];
+  newData!: any;
+  equipos!: any;
+  usuarios!: any;
 
   @ContentChildren(MatColumnDef, { descendants: true })
   columnsDef!: QueryList<MatColumnDef>;
@@ -38,7 +43,12 @@ export class TablePrestamosComponent {
   aprobar!: boolean;
   rechazar!: boolean;
 
-  constructor() {}
+  constructor(
+    private serviceEquipo: EquipoService,
+    private serviceUsuario: UsuarioService
+  ) {
+    //this.crearNuevaData();
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['metaDataColumns']) {
@@ -46,12 +56,39 @@ export class TablePrestamosComponent {
     }
   }
 
-  //Validar si los prestamos estan aprobados o rechazados
+  crearNuevaData() {
+    this.data.forEach((data: any) => {
+      const id_equipo_per = this.serviceEquipo
+        .cargarEquipo(data.id_equipo_per)
+        .subscribe((resp) => {
+          return resp.nombre;
+        });
 
-  //Si esta aprobado 2da condicion
+      const usuario_presta = this.usuarios.find((user: any) => {
+        return user.id_usuario === data.id_usuario_presta_per;
+      });
 
-  //Si esta rechazado 3ra condicion
+      const id_usuario_presta_per = `${usuario_presta.nombre} ${usuario_presta.apellido}`;
 
+      const usuario_solicita = this.usuarios.find((user: any) => {
+        return user.id_usuario === data.id_usuario_solicita_per;
+      });
+
+      const id_usuario_solicita_per = `${usuario_solicita.nombre} ${usuario_solicita.apellido}`;
+
+      this.newData.push({
+        id_prestamo: data.id_prestamo,
+        id_equipo_per: id_equipo_per,
+        fecha_prestamo: data.fecha_prestamo,
+        fecha_devolucion: data.fecha_devolucion,
+        id_usuario_presta_per: id_usuario_presta_per,
+        id_usuario_solicita_per: id_usuario_solicita_per,
+        observaciones: data.observaciones,
+        estado: data.estado,
+      });
+      console.log(this.newData);
+    });
+  }
   accionEditar(row: any) {
     this.onClick.emit(row);
   }

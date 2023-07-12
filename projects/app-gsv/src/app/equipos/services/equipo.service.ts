@@ -15,7 +15,7 @@ export class EquipoService {
   }
 
   cargarEquipo(id: string): Observable<any> {
-    return this.http.get(this.url + id);
+    return this.http.get(`${this.url}/${id}`);
   }
 
   registrarEquipo(equipo: Equipo): Observable<any> {

@@ -19,7 +19,7 @@ export class PrestamoService {
   }
 
   cargarPretamo(id: string): Observable<any> {
-    return this.http.get(this.url + id);
+    return this.http.get(`${this.url}/${id}`);
   }
 
   registrarPrestamo(cliente: Prestamo): Observable<any> {
@@ -27,11 +27,11 @@ export class PrestamoService {
   }
 
   actualizarPrestamo(id: string, cliente: Prestamo): Observable<any> {
-    return this.http.put(this.url + id, cliente);
+    return this.http.put(`${this.url}/${id}`, cliente);
   }
 
   eliminarPrestamo(id: string): Observable<any> {
-    return this.http.delete(this.url + id);
+    return this.http.delete(`${this.url}/${id}`);
   }
 
   aprobarPrestamo(
@@ -51,6 +51,7 @@ export class PrestamoService {
     id_prestamo: string,
     observaciones: string
   ): Observable<any> {
-    return this.http.put(`${this.url}/devolver/${id_prestamo}`, observaciones);
+    const body = { observaciones: observaciones };
+    return this.http.put(`${this.url}/devolver/${id_prestamo}`, body);
   }
 }

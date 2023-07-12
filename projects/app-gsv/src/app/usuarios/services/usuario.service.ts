@@ -15,7 +15,7 @@ export class UsuarioService {
   }
 
   cargarUsuario(id: string): Observable<any> {
-    return this.http.get(this.url + id);
+    return this.http.get(`${this.url}/${id}`);
   }
 
   registrarUsuario(usuario: Usuario): Observable<any> {

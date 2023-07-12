@@ -102,6 +102,7 @@ export class PageListComponent {
   }
   accionAprobar(row: any) {
     console.log(row);
+    //AQUI TOCA MANDAR EL ID DEL LABORATORISTA QUE SE LOGEA.
     this.prestamoService
       .aprobarPrestamo(row.id_prestamo, row.id_usuario_presta_per)
       .subscribe((resp) => {
@@ -126,12 +127,12 @@ export class PageListComponent {
       this.formulario = false;
       return;
     }
-    if (formData.id) {
+    if (formData.id_prestamo) {
       const cliente = { ...formData };
       console.log('Entro al ID');
       console.log(cliente);
       this.prestamoService
-        .actualizarPrestamo(formData.id, cliente)
+        .devolverPrestamo(formData.id_prestamo, cliente.observaciones)
         .subscribe(() => {
           this.cargarClientes('');
           this.formulario = false;
