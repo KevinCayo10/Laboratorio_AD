@@ -42,7 +42,7 @@ export class PageListComponent {
 
   metaDataColumns: MetaDataColumn[] = [
     { field: 'id_equipo', title: 'ID' },
-    { field: 'nombre', title: 'NOMBRES' },
+    { field: 'nombre_equipo', title: 'NOMBRE' },
     { field: 'marca', title: 'MARCA' },
     { field: 'caracteristicas', title: 'CARACTERISTICA' },
     { field: 'estado', title: 'ESTADO' },

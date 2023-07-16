@@ -19,10 +19,10 @@
             <button class="btn btn-secondary" [disabled]="!(row.estado === 'PENDIENTE')" (click)="accionRechazar(row)">
               <i class="fa-solid fa-file-circle-xmark"></i>
               <span class="btn-tooltip">Rechazar</span>
-              <span class="btn-tooltip">Devolver</span>
 
             </button>
-            <button class="btn btn-warning" [disabled]="(row.estado==='APROBADO')" (click)="accionEditar(row)">
+            <button class="btn btn-warning" [disabled]="(row.estado==='DEVUELTO')" (click)="accionEditar(row)">
+              <span class="btn-tooltip">Devolver</span>
               <i class="fa fa-pencil"></i>
             </button>
             <button class="btn btn-danger" (click)="accionEliminar(row.id_prestamo)">

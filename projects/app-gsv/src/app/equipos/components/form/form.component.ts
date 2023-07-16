@@ -23,7 +23,7 @@ export class FormComponent {
   cargarFormulario() {
     this.formulario = new FormGroup({
       id_equipo: new FormControl(this.data?.id_equipo),
-      nombre: new FormControl(this.data?.nombre, Validators.required),
+      nombre_equipo: new FormControl(this.data?.nombre_equipo, Validators.required),
       marca: new FormControl(this.data?.marca, Validators.required),
       caracteristicas: new FormControl(
         this.data?.caracteristicas,

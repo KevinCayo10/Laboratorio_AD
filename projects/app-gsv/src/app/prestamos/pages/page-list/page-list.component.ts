@@ -104,7 +104,7 @@ export class PageListComponent {
     console.log(row);
     //AQUI TOCA MANDAR EL ID DEL LABORATORISTA QUE SE LOGEA.
     this.prestamoService
-      .aprobarPrestamo(row.id_prestamo, row.id_usuario_presta_per)
+      .aprobarPrestamo(row.id_prestamo, '3')
       .subscribe((resp) => {
         this.mostrarMensaje('Prestamo aprobado');
         this.cargarClientes('');
