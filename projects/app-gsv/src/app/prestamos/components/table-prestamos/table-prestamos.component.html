@@ -21,7 +21,7 @@
               <span class="btn-tooltip">Rechazar</span>
 
             </button>
-            <button class="btn btn-warning" [disabled]="(row.estado==='DEVUELTO')" (click)="accionEditar(row)">
+            <button class="btn btn-warning" [disabled]="!(row.estado==='DEVUELTO')" (click)="accionEditar(row)">
               <span class="btn-tooltip">Devolver</span>
               <i class="fa fa-pencil"></i>
             </button>
